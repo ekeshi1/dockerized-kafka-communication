@@ -1,0 +1,55 @@
+swagger: "2.0"
+consumes:
+  - application/json
+info:
+  version: 1.0.0
+  title: Kafka integration
+  description: |-
+basePath: /api
+
+schemes:
+  - "http"
+
+
+paths:
+  /clients:
+    post:
+      summary: "Submit new client information"
+      parameters:
+        - name: clientData
+          in: "body"
+          description: "Client Data"
+          required: true
+          schema:
+            $ref: '#/definitions/ClientData'
+      responses:
+        "202":
+          description: "Accepted"
+        "400":
+          description: "Bad request, input parameters not valid"
+          schema:
+            $ref: '#/definitions/BadRequestResponse'
+
+definitions:
+  ClientData:
+    type: object
+    properties:
+      name:
+        type: "string"
+        example: "Alice"
+      surname:
+        type: "string"
+        example: "Thompson"
+      wage:
+        type: "number"
+        format: "double"
+        example: 5500.75
+      eventTime:
+        type: "date-time"
+        pattern: "yyyy-MM-dd'T'HH:mm:ss:SSSXXX"
+        example: 2012-04-23T18:25:43.511Z
+  BadRequestResponse:
+    type: object
+    properties:
+      message:
+        type: "string"

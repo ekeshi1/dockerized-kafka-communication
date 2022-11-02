@@ -1,0 +1,33 @@
+plugins {
+    id 'org.springframework.boot' version '2.7.5'
+    id 'io.spring.dependency-management' version '1.0.11.RELEASE'
+    id 'java'
+}
+group 'org.example'
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation platform('org.testcontainers:testcontainers-bom:1.17.5') //import bom
+    testImplementation('org.testcontainers:mysql') //no version s
+    implementation 'mysql:mysql-connector-java:8.0.28'
+    testImplementation "org.testcontainers:kafka:1.17.5"
+    implementation 'org.springframework.boot:spring-boot-starter-actuator:'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    implementation 'org.springframework.kafka:spring-kafka:2.8.6'
+    testImplementation 'org.springframework:spring-test'
+
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+    testLogging {
+        events "passed", "skipped", "failed"
+        showStandardStreams = true
+        showStackTraces = true
+        exceptionFormat 'full'
+    }
+}

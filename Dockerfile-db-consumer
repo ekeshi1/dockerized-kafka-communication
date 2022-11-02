@@ -1,0 +1,17 @@
+FROM gradle:7.4.2-jdk11 AS build
+
+COPY . /src
+
+WORKDIR /src
+
+RUN gradle :kafka-consumer:build  --no-daemon
+
+FROM openjdk:11-jre-slim
+
+RUN mkdir /app
+
+COPY --from=build /src/kafka-consumer/build/libs/kafka-consumer.jar /app/application.jar
+
+EXPOSE 8080
+
+CMD ["java", "-jar", "/app/application.jar"]

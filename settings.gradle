@@ -1,0 +1,5 @@
+rootProject.name = 'kafka-communication'
+include 'kafka-producer'
+include 'kafka-consumer'
+include 'end-to-end-tests'
+

@@ -1,0 +1,73 @@
+<configuration>
+    <property name="LOGS" value="./logs"/>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <appender name="FILE_KAFKA" class="ch.qos.logback.core.FileAppender">
+        <file>${LOGS}/kafka.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+        <append>false</append>
+    </appender>
+
+    <appender name="FILE_DB" class="ch.qos.logback.core.FileAppender">
+        <file>${LOGS}/db.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+        <append>false</append>
+    </appender>
+
+    <appender name="FILE_REST_PRODUCER" class="ch.qos.logback.core.FileAppender">
+        <file>${LOGS}/rest_producer.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+        <append>false</append>
+    </appender>
+
+    <appender name="FILE_DB_CONSUMER" class="ch.qos.logback.core.FileAppender">
+        <file>${LOGS}/db-consumer.log</file>
+        <encoder>
+            <pattern>%msg%n</pattern>
+        </encoder>
+        <append>false</append>
+    </appender>
+
+    <appender name="FILE_TESTCONTAINERS" class="ch.qos.logback.core.FileAppender">
+        <file>${LOGS}/testcontainers.log</file>
+        <encoder>
+            <pattern>%d{HH:mm:ss.SSS} [%thread] %-5level %logger - %msg%n</pattern>
+        </encoder>
+        <append>false</append>
+    </appender>
+
+    <root level="info">
+        <appender-ref ref="STDOUT"/>
+    </root>
+
+    <logger name="Kafka">
+        <appender-ref ref="FILE_KAFKA"/>
+    </logger>
+    <logger name="Db">
+        <appender-ref ref="FILE_DB"/>
+    </logger>
+    <logger name="rest-producer">
+        <appender-ref ref="FILE_REST_PRODUCER"/>
+    </logger>
+    <logger name="db-consumer">
+        <appender-ref ref="FILE_DB_CONSUMER"/>
+    </logger>
+
+    <logger name="org.testcontainers" level="INFO">
+        <appender-ref ref="FILE_TESTCONTAINERS"/>
+    </logger>
+    <logger name="com.github.dockerjava" level="INFO">
+        <appender-ref ref="FILE_TESTCONTAINERS"/>
+    </logger>
+</configuration>
