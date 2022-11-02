@@ -81,7 +81,7 @@ public class EndToEndTest extends EndToEndSuite {
         assertThat(result.getStatusCode()).isEqualTo(HttpStatus.BAD_REQUEST);
         Map<String,String> errorMessage = (Map<String, String>) result.getBody();
 
-        assertEquals("Name must be between 2 and 32 characters long", errorMessage.get("message"));
+        assertEquals("Invalid format for  field: eventTime.", errorMessage.get("message"));
         Thread.sleep(3000);
 
         Integer count = dbFacade.checkNameInserted("UniqueName");
@@ -95,9 +95,9 @@ public class EndToEndTest extends EndToEndSuite {
         ResponseEntity<Map> result  =
                 rest.post(CLIENTS_ENDPOINT, Map.of(
                         "name", "UniqueName",
-                        "surname","Thomson",
+                        "surname", "Thomson",
                         "wage", -5500.75,
-                        "eventTime","2012-04-23FG18:25:43:511Z"
+                        "eventTime", "2012-04-23T18:25:43:511Z"
                 ), Map.class);
 
 

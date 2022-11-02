@@ -7,7 +7,6 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 
-import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.springframework.http.HttpMethod.POST;
 
 @TestComponent
@@ -21,13 +20,12 @@ public class TestRestFacade {
     private TestRestTemplate rest;
 
     public <T> ResponseEntity<T> post(String url, Object body, Class<T> responseType) {
-        final var response = rest.exchange(
+
+        return rest.exchange(
                 "http://" + host + ":" + port + url,
                 POST,
                 new HttpEntity<>(body),
                 responseType
         );
-
-        return response;
     }
 }

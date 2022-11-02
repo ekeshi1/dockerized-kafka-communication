@@ -4,7 +4,6 @@ package org.example.service;
 import lombok.extern.slf4j.Slf4j;
 import org.example.config.TaxationProperties;
 import org.example.dao.ClientsRepository;
-import org.example.dto.ClientDtoMapper;
 import org.example.model.Client;
 import org.example.taxation.GrossSalaryCalculator;
 import org.example.taxation.TaxationInfo;

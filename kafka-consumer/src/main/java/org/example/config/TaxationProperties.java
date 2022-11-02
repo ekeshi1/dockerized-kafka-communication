@@ -8,7 +8,6 @@ import org.springframework.context.annotation.PropertySource;
 
 import javax.annotation.PostConstruct;
 import java.math.BigDecimal;
-import java.util.Objects;
 
 @Configuration
 @PropertySource("classpath:taxation/taxes.properties")

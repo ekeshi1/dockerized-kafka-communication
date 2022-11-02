@@ -7,8 +7,6 @@ import org.example.dto.ClientDtoMapper;
 import org.example.model.Client;
 import org.example.service.ClientsService;
 import org.springframework.dao.RecoverableDataAccessException;
-import org.springframework.dao.TransientDataAccessException;
-import org.springframework.dao.TransientDataAccessResourceException;
 import org.springframework.kafka.annotation.DltHandler;
 import org.springframework.kafka.annotation.RetryableTopic;
 import org.springframework.kafka.retrytopic.TopicSuffixingStrategy;
@@ -17,8 +15,6 @@ import org.springframework.messaging.handler.annotation.Header;
 import org.springframework.messaging.handler.annotation.Payload;
 import org.springframework.retry.annotation.Backoff;
 import org.springframework.stereotype.Component;
-
-import java.sql.SQLTransientException;
 
 @Component
 @Slf4j
@@ -47,7 +43,7 @@ public class KafkaReliableListener {
             include = {RecoverableDataAccessException.class})
     @org.springframework.kafka.annotation.KafkaListener(topics = "client-topic")
     public void listenNewClient(@Payload ClientDTO message, @Header(KafkaHeaders.RECEIVED_TOPIC) String topic)  {
-        log.info("Received " + message);
+        log.info("Received message [{}]in topic {}", message, topic);
         Client client = clientDtoMapper.mapToDomain(message);
         clientsService.processClient(client);
      }
